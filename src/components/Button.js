@@ -14,36 +14,61 @@ import styled from "styled-components";
 //     }
 //   }
 // }};
-const StyledButton = styled.button`
-  background-color: ${(props) =>
-    props.color === "primary" ? "#605dec" : "white"};
-  color: ${(props) => (props.color === "primary" ? "#fafafa" : "#605DEC")};
-  border: ${(props) =>
-    props.color === "primary" ? "none" : "1px solid #605DEC"};
+
+const StyledButtonBase = styled.button`
   border-radius: 4px;
   margin: 0 8px;
   font-size: ${(props) => (props.size === "large" ? "18px" : "16px")};
   padding: ${(props) => (props.size === "small" ? "8px 16px" : "12px 20px")};
 
-  &:hover {
-    background-color: ${(props) =>
-      props.color === "primary" ? "#1513a0" : "#E9E8FC"};
-  }
-
   &:disabled {
-    background: ${(props) =>
-      props.color === "primary" ? "rgba(203, 212, 230, 0.3)" : "white"};
-    outline: ${(props) =>
-      props.color === "primary" ? "1px solid #7c8db0" : "none"};
     color: #7c8db0;
   }
 `;
 
+const StyledPrimaryButton = styled(StyledButtonBase)`
+  background-color: #605dec;
+  color: #fafafa;
+  border: none;
+
+  &:hover {
+    background-color: #1513a0;
+  }
+
+  &:disabled {
+    background: rgba(203, 212, 230, 0.3);
+    outline: 1px solid #7c8db0;
+  }
+`;
+
+const StyledSecondaryButton = styled(StyledButtonBase)`
+  background-color: white;
+  color: #605dec;
+  border: 1px solid #605dec;
+
+  &:hover {
+    background-color: #e9e8fc;
+  }
+
+  &:disabled {
+    background: white;
+    border-color: #7c8db0;
+  }
+`;
+
 const Button = ({ children, size, disabled, color }) => {
+  if (color === "secondary") {
+    return (
+      <StyledSecondaryButton size={size} color={color} disabled={disabled}>
+        {children}
+      </StyledSecondaryButton>
+    );
+  }
+
   return (
-    <StyledButton size={size} color={color} disabled={disabled}>
+    <StyledPrimaryButton size={size} color={color} disabled={disabled}>
       {children}
-    </StyledButton>
+    </StyledPrimaryButton>
   );
 };
 

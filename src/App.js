@@ -1,6 +1,15 @@
+import { useState } from "react";
+
 import Button from "./components/Button";
+import Alert from "./components/Alert";
 
 function App() {
+  const [isOpenAlert, setOpenAlert] = useState(false);
+
+  const handleOpen = () => setOpenAlert(true);
+
+  const handleClose = () => setOpenAlert(false);
+
   return (
     <>
       <Button color="primary">Primary button</Button>
@@ -17,6 +26,14 @@ function App() {
       <Button color="secondary" disabled>
         Secondary button
       </Button>
+
+      <button onClick={handleOpen}>Open alert</button>
+
+      {isOpenAlert && (
+        <Alert color="primary" onClose={handleClose}>
+          Some text
+        </Alert>
+      )}
     </>
   );
 }
