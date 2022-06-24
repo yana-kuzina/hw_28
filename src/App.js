@@ -30,7 +30,7 @@ function App() {
       <button onClick={handleOpen}>Open alert</button>
 
       {isOpenAlert && (
-        <Alert color="primary" onClose={handleClose}>
+        <Alert color="warning" onClose={handleClose}>
           Some text
         </Alert>
       )}
